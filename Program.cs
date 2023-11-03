@@ -61,8 +61,15 @@ namespace EFRepDemo
                     Environment.Exit(0);
                     break;
                 default:
-                    int menuChoice = Convert.ToInt32(input) - 1;
-                    return users[menuChoice];
+                    if (int.TryParse(input, out int menuChoice) && menuChoice >= 1 && menuChoice <= users.Count)
+                    {
+                        return users[menuChoice - 1];
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Please select a valid option.");
+                        return null;
+                    }
             }
 
             return null;
@@ -138,6 +145,9 @@ namespace EFRepDemo
                         return;
                     case "q":
                         Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid input. Please select a valid option.");
                         break;
                 }
             }
